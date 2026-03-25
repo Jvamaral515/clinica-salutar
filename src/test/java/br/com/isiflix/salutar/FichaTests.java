@@ -23,7 +23,6 @@ public class FichaTests {
     @Test
     public void shouldCreateFicha(){
         FichaPaciente f = new FichaPaciente();
-        f.setIdFicha(10);
         f.setNomePaciente("Joao Victor");
         FichaPaciente res = service.cadastrar(f);
         assertTrue(res != null && res.getUuid() != null && res.getAtivo() == 1);
@@ -31,7 +30,7 @@ public class FichaTests {
 
     @Test
     public void shouldDeleteFicha(){
-        assertTrue(service.excluir(1));
+        assertTrue(service.excluir(10));
     }
 
     @Test
