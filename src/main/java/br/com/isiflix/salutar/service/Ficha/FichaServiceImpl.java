@@ -24,7 +24,15 @@ public class FichaServiceImpl implements IFichaService{
 
     @Override
     public FichaPaciente alterar(FichaPaciente ficha) {
-        return dao.save(ficha);
+        FichaPaciente tmp = dao.findById(ficha.getIdFicha()).orElse(null);
+
+        if (tmp != null){
+            if (ficha.getAtivo() != null)
+                tmp.setAtivo(ficha.getAtivo());
+            return dao.save(ficha);
+        }
+
+        return null;
     }
 
     @Override
