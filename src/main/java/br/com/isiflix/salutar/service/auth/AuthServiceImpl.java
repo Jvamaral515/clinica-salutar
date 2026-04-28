@@ -24,6 +24,13 @@ public class AuthServiceImpl implements IAuthService{
 
     @Override
     public SalutarToken fazerLogin(Usuario dadosLogin) {
+        Usuario res = dao.findByLogin(dadosLogin.getLogin());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (res != null){
+            if (encoder.matches(dadosLogin.getSenha(), res.getSenha())){
+                return new SalutarToken("*joao123");
+            }
+        }
         return null;
     }
 }

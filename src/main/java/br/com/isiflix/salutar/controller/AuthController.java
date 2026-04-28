@@ -1,6 +1,7 @@
 package br.com.isiflix.salutar.controller;
 
 import br.com.isiflix.salutar.model.Usuario;
+import br.com.isiflix.salutar.security.SalutarToken;
 import br.com.isiflix.salutar.service.auth.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +24,14 @@ public class AuthController {
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<SalutarToken> efetuarLogin(@RequestBody Usuario dadosLogin) {
+        SalutarToken token = service.fazerLogin(dadosLogin);
+        if (token != null)
+            return ResponseEntity.ok(token);
+
+        return ResponseEntity.status(403).build();
     }
 }
